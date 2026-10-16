@@ -1,722 +1,1481 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS // 智能技术中枢</title>
+<style>
+  :root {
+    --bg-0: #04060c;
+    --bg-1: #070b14;
+    --bg-2: #0b1120;
+    --line: rgba(120, 190, 255, 0.14);
+    --line-strong: rgba(120, 190, 255, 0.28);
+    --cy: #22e5ff;
+    --cy-dim: #0ea5c9;
+    --pu: #7c5cff;
+    --pk: #ff2e97;
+    --tx: #e8f3ff;
+    --tx-dim: #8ba0bd;
+    --tx-mute: #5b6c85;
+    --glass: rgba(12, 22, 40, 0.55);
+    --mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    --sans: "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+    --angle: 0deg;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg-0);
+    color: var(--tx);
+    font-family: var(--sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+
+  body.locked { overflow: hidden; }
+
+  ::selection { background: rgba(34, 229, 255, 0.28); color: #fff; }
+
+  ::-webkit-scrollbar { width: 9px; }
+  ::-webkit-scrollbar-track { background: #060a11; }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--cy-dim), var(--pu));
+    border-radius: 9px;
+  }
+
+  /* ============ 背景层 ============ */
+  #bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    display: block;
+  }
+
+  .grid-overlay {
+    position: fixed;
+    inset: -50%;
+    z-index: 1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size: 64px 64px;
+    transform: perspective(600px) rotateX(58deg) translateY(0);
+    transform-origin: center 20%;
+    animation: gridFlow 22s linear infinite;
+    opacity: 0.5;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 78%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 78%);
+  }
+
+  @keyframes gridFlow {
+    from { background-position: 0 0, 0 0; }
+    to   { background-position: 0 64px, 64px 0; }
+  }
+
+  .aura {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+  }
+  .aura.a1 { width: 46vw; height: 46vw; top: -12vw; left: -8vw; background: radial-gradient(circle, rgba(124,92,255,0.55), transparent 68%); animation: drift 20s ease-in-out infinite; }
+  .aura.a2 { width: 40vw; height: 40vw; top: 34vh; right: -10vw; background: radial-gradient(circle, rgba(34,229,255,0.42), transparent 68%); animation: drift 26s ease-in-out infinite reverse; }
+  .aura.a3 { width: 34vw; height: 34vw; bottom: -12vw; left: 28vw; background: radial-gradient(circle, rgba(255,46,151,0.28), transparent 68%); animation: drift 32s ease-in-out infinite; }
+
+  @keyframes drift {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    33% { transform: translate3d(6vw, 4vh, 0) scale(1.12); }
+    66% { transform: translate3d(-4vw, -3vh, 0) scale(0.94); }
+  }
+
+  /* 扫描线 */
+  .scanlines {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.022) 0px,
+      rgba(255, 255, 255, 0.022) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: overlay;
+  }
+
+  .cursor-glow {
+    position: fixed;
+    width: 520px;
+    height: 520px;
+    margin: -260px 0 0 -260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(34,229,255,0.10), transparent 62%);
+    pointer-events: none;
+    z-index: 3;
+    transition: opacity 0.4s ease;
+    opacity: 0;
+  }
+
+  /* ============ 开机动画 ============ */
+  .boot {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: var(--bg-0);
+    display: grid;
+    place-items: center;
+    transition: opacity 0.7s ease, visibility 0.7s ease;
+  }
+  .boot.done { opacity: 0; visibility: hidden; }
+
+  .boot-inner { width: min(360px, 76vw); text-align: center; }
+
+  .boot-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    letter-spacing: 0.42em;
+    color: var(--cy);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    animation: flicker 2.4s infinite;
+  }
+
+  @keyframes flicker {
+    0%, 92%, 100% { opacity: 1; }
+    93% { opacity: 0.35; }
+    95% { opacity: 1; }
+    96% { opacity: 0.5; }
+  }
+
+  .boot-bar {
+    height: 2px;
+    background: rgba(120, 190, 255, 0.14);
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  .boot-bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--pu), var(--cy));
+    box-shadow: 0 0 14px var(--cy);
+    animation: load 1.5s cubic-bezier(.6,.05,.25,1) forwards;
+  }
+  @keyframes load { to { width: 100%; } }
+
+  .boot-pct {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--tx-mute);
+    margin-top: 12px;
+    letter-spacing: 0.18em;
+  }
+
+  /* ============ 进度条 ============ */
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 2px;
+    width: 0;
+    z-index: 60;
+    background: linear-gradient(90deg, var(--pu), var(--cy), var(--pk));
+    box-shadow: 0 0 12px rgba(34, 229, 255, 0.75);
+  }
+
+  /* ============ 导航 ============ */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 20px clamp(20px, 5vw, 64px);
+    transition: padding 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+    border-bottom: 1px solid transparent;
+  }
+  .nav.solid {
+    padding: 12px clamp(20px, 5vw, 64px);
+    background: rgba(5, 9, 16, 0.72);
+    backdrop-filter: blur(16px) saturate(150%);
+    -webkit-backdrop-filter: blur(16px) saturate(150%);
+    border-bottom-color: var(--line);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    font-family: var(--mono);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    color: var(--tx);
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 26px; height: 26px;
+    position: relative;
+    flex: 0 0 auto;
+  }
+  .brand-mark::before,
+  .brand-mark::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--cy);
+    border-radius: 6px;
+  }
+  .brand-mark::before { animation: spin 6s linear infinite; }
+  .brand-mark::after {
+    border-color: var(--pu);
+    inset: 5px;
+    border-radius: 3px;
+    animation: spin 4s linear infinite reverse;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .brand span { color: var(--cy); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 2.4vw, 34px);
+    list-style: none;
+  }
+  .nav-links a {
+    position: relative;
+    color: var(--tx-dim);
+    text-decoration: none;
+    font-size: 13.5px;
+    letter-spacing: 0.06em;
+    padding: 6px 2px;
+    transition: color 0.25s ease;
+  }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, var(--cy), var(--pu));
+    box-shadow: 0 0 8px var(--cy);
+    transition: width 0.3s ease;
+  }
+  .nav-links a:hover { color: var(--tx); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    color: var(--cy);
+    border: 1px solid rgba(34, 229, 255, 0.42);
+    background: rgba(34, 229, 255, 0.06);
+    padding: 9px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.28s ease;
+    white-space: nowrap;
+  }
+  .nav-btn:hover {
+    background: rgba(34, 229, 255, 0.16);
+    box-shadow: 0 0 22px rgba(34, 229, 255, 0.42), inset 0 0 18px rgba(34,229,255,0.12);
+    transform: translateY(-1px);
+  }
+
+  .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 6px; }
+  .nav-toggle i { display: block; width: 20px; height: 1.5px; background: var(--tx); margin: 4px 0; transition: 0.3s; }
+
+  /* ============ 通用 ============ */
+  main { position: relative; z-index: 5; }
+
+  .wrap { width: min(1180px, 90vw); margin: 0 auto; }
+
+  section { padding: clamp(72px, 9vw, 130px) 0; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--cy);
+    border: 1px solid rgba(34, 229, 255, 0.28);
+    background: rgba(34, 229, 255, 0.05);
+    padding: 7px 14px;
+    border-radius: 30px;
+    margin-bottom: 26px;
+  }
+  .tag i {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--cy);
+    box-shadow: 0 0 10px var(--cy);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  .sec-head { max-width: 660px; margin-bottom: 56px; }
+
+  h2 {
+    font-size: clamp(1.7rem, 4vw, 2.9rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 18px;
+  }
+  h2 em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--cy), var(--pu) 60%, var(--pk));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .sec-head p { color: var(--tx-dim); font-size: 15.5px; }
+
+  /* 滚动显现 */
+  .reveal {
+    opacity: 0;
+    transform: translateY(34px);
+    transition: opacity 0.9s cubic-bezier(.16,.84,.44,1), transform 0.9s cubic-bezier(.16,.84,.44,1);
+  }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ============ Hero ============ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 56px;
+    align-items: center;
+    width: 100%;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.3rem, 6.6vw, 5rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin-bottom: 26px;
+  }
+
+  .hero h1 .l1 { display: block; color: var(--tx); }
+  .hero h1 .l2 {
+    display: block;
+    background: linear-gradient(100deg, var(--cy) 0%, var(--pu) 48%, var(--pk) 100%);
+    background-size: 220% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shift 7s ease-in-out infinite;
+    position: relative;
+  }
+  @keyframes shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .glitch::before {
+    animation: glitchA 3.6s infinite steps(2, end);
+    text-shadow: -2px 0 rgba(255, 46, 151, 0.55);
+  }
+  .glitch::after {
+    animation: glitchB 4.2s infinite steps(2, end);
+    text-shadow: 2px 0 rgba(34, 229, 255, 0.55);
+  }
+  @keyframes glitchA {
+    0%, 88%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0); }
+    89% { clip-path: inset(12% 0 62% 0); transform: translate(-4px, 1px); }
+    92% { clip-path: inset(48% 0 26% 0); transform: translate(4px, -1px); }
+    95% { clip-path: inset(72% 0 8% 0); transform: translate(-3px, 0); }
+  }
+  @keyframes glitchB {
+    0%, 90%, 100% { clip-path: inset(100% 0 0 0); transform: translate(0); }
+    91% { clip-path: inset(30% 0 52% 0); transform: translate(4px, -1px); }
+    94% { clip-path: inset(8% 0 78% 0); transform: translate(-4px, 1px); }
+  }
+
+  .hero-typed {
+    font-family: var(--mono);
+    font-size: clamp(13px, 1.5vw, 16px);
+    color: var(--cy);
+    letter-spacing: 0.06em;
+    min-height: 1.8em;
+    margin-bottom: 20px;
+  }
+  .caret {
+    display: inline-block;
+    width: 8px;
+    height: 1.05em;
+    background: var(--cy);
+    margin-left: 4px;
+    vertical-align: -0.16em;
+    box-shadow: 0 0 10px var(--cy);
+    animation: blink 1s steps(2, start) infinite;
+  }
+  @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+
+  .hero-desc {
+    color: var(--tx-dim);
+    font-size: 15.5px;
+    max-width: 540px;
+    margin-bottom: 38px;
+  }
+
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 44px; }
+
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 14px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid transparent;
+    overflow: hidden;
+    transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease, color 0.28s ease;
+  }
+
+  .btn-primary {
+    color: #04070e;
+    background: linear-gradient(100deg, var(--cy), var(--pu));
+    box-shadow: 0 0 26px rgba(34, 229, 255, 0.3);
+  }
+  .btn-primary::after {
+    content: "";
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.6), transparent);
+    transform: skewX(-22deg);
+    transition: left 0.7s ease;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 42px rgba(34, 229, 255, 0.55); }
+  .btn-primary:hover::after { left: 130%; }
+
+  .btn-ghost {
+    color: var(--tx);
+    border-color: var(--line-strong);
+    background: rgba(120, 190, 255, 0.04);
+    backdrop-filter: blur(8px);
+  }
+  .btn-ghost:hover {
+    border-color: var(--cy);
+    background: rgba(34, 229, 255, 0.1);
+    box-shadow: 0 0 26px rgba(34, 229, 255, 0.22);
+    transform: translateY(-2px);
+  }
+
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    color: var(--tx-mute);
+    text-transform: uppercase;
+  }
+  .hero-meta b { color: var(--cy); font-weight: 600; }
+
+  /* 右侧核心球 */
+  .orb-stage {
+    position: relative;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    max-width: 460px;
+    margin-left: auto;
+  }
+  .orb-ring {
+    position: absolute;
+    inset: 6%;
+    border: 1px solid var(--line-strong);
+    border-radius: 50%;
+    animation: spin 24s linear infinite;
+  }
+  .orb-ring:nth-child(2) { inset: 16%; border-style: dashed; border-color: rgba(124,92,255,0.4); animation-duration: 17s; animation-direction: reverse; }
+  .orb-ring:nth-child(3) { inset: 26%; border-color: rgba(255,46,151,0.28); animation-duration: 32s; }
+
+  .orb-ring i {
+    position: absolute;
+    top: -3.5px; left: 50%;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--cy);
+    box-shadow: 0 0 14px var(--cy);
+    transform: translateX(-50%);
+  }
+  .orb-ring:nth-child(2) i { background: var(--pu); box-shadow: 0 0 14px var(--pu); }
+  .orb-ring:nth-child(3) i { background: var(--pk); box-shadow: 0 0 14px var(--pk); }
+
+  .orb-core {
+    position: relative;
+    width: 46%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 32% 30%, rgba(255,255,255,0.55), transparent 42%),
+      conic-gradient(from 0deg, var(--cy), var(--pu), var(--pk), var(--cy));
+    filter: blur(0.4px);
+    box-shadow: 0 0 70px rgba(34,229,255,0.5), 0 0 130px rgba(124,92,255,0.35);
+    animation: spin 14s linear infinite, breathe 5s ease-in-out infinite;
+  }
+  @keyframes breathe {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  .orb-core::after {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background: rgba(4,6,12,0.72);
+    backdrop-filter: blur(6px);
+  }
+
+  .orb-chip {
+    position: absolute;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--tx-dim);
+    background: rgba(8, 15, 28, 0.8);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 6px 11px;
+    backdrop-filter: blur(10px);
+    white-space: nowrap;
+    animation: float 6s ease-in-out infinite;
+  }
+  .orb-chip.c1 { top: 8%; left: -4%; }
+  .orb-chip.c2 { top: 42%; right: -8%; animation-delay: -2s; }
+  .orb-chip.c3 { bottom: 10%; left: 6%; animation-delay: -4s; }
+  .orb-chip b { color: var(--cy); }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ============ 数据条 ============ */
+  .stats {
+    padding: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(12,22,40,0.4), transparent);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    padding: 44px 30px;
+    border-right: 1px solid var(--line);
+    position: relative;
+    overflow: hidden;
+  }
+  .stat:last-child { border-right: 0; }
+  .stat::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cy), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .stat:hover::before { opacity: 1; }
+
+  .stat-num {
+    font-family: var(--mono);
+    font-size: clamp(1.9rem, 3.6vw, 2.9rem);
+    font-weight: 700;
+    color: var(--tx);
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .stat-num i { font-style: normal; color: var(--cy); font-size: 0.55em; margin-left: 3px; }
+  .stat-label {
+    font-size: 13px;
+    color: var(--tx-mute);
+    letter-spacing: 0.1em;
+  }
+
+  /* ============ 功能卡片 ============ */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .card {
+    position: relative;
+    padding: 34px 30px 30px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: linear-gradient(160deg, rgba(16, 28, 50, 0.7), rgba(7, 12, 22, 0.75));
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(.16,.84,.44,1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 0%), rgba(34,229,255,0.13), transparent 62%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(34, 229, 255, 0.42);
+    box-shadow: 0 22px 54px -18px rgba(34, 229, 255, 0.38);
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-idx {
+    position: absolute;
+    top: 20px; right: 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: rgba(120, 190, 255, 0.28);
+  }
+
+  .card-icon {
+    width: 46px; height: 46px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(34, 229, 255, 0.3);
+    border-radius: 10px;
+    background: rgba(34, 229, 255, 0.07);
+    margin-bottom: 22px;
+    color: var(--cy);
+    transition: all 0.4s ease;
+  }
+  .card:hover .card-icon {
+    background: rgba(34, 229, 255, 0.16);
+    box-shadow: 0 0 24px rgba(34, 229, 255, 0.35);
+    transform: rotate(-6deg) scale(1.06);
+  }
+  .card-icon svg { width: 22px; height: 22px; }
+
+  .card h3 {
+    font-size: 17.5px;
+    font-weight: 650;
+    margin-bottom: 11px;
+    letter-spacing: -0.01em;
+  }
+  .card p { font-size: 14px; color: var(--tx-dim); line-height: 1.72; }
+
+  /* ============ 技术栈跑马灯 ============ */
+  .marquee {
+    position: relative;
+    overflow: hidden;
+    padding: 8px 0;
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    margin-bottom: 18px;
+  }
+  .marquee-track {
+    display: flex;
+    gap: 16px;
+    width: max-content;
+    animation: slide 34s linear infinite;
+  }
+  .marquee.rev .marquee-track { animation-direction: reverse; animation-duration: 42s; }
+  @keyframes slide { to { transform: translateX(-50%); } }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.1em;
+    color: var(--tx-dim);
+    border: 1px solid var(--line);
+    background: rgba(11, 17, 32, 0.72);
+    border-radius: 30px;
+    padding: 10px 20px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  .pill i {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--pu);
+    box-shadow: 0 0 8px var(--pu);
+  }
+  .pill:hover { color: var(--tx); border-color: rgba(34,229,255,0.45); background: rgba(34,229,255,0.09); }
+
+  /* ============ 时间线 ============ */
+  .timeline {
+    position: relative;
+    padding-left: 40px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 9px; top: 6px; bottom: 6px;
+    width: 1px;
+    background: linear-gradient(180deg, transparent, var(--cy) 8%, var(--pu) 55%, transparent);
+  }
+
+  .tl-item { position: relative; padding-bottom: 44px; }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -37px; top: 6px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: var(--bg-0);
+    border: 2px solid var(--cy);
+    box-shadow: 0 0 0 4px rgba(34,229,255,0.1), 0 0 14px rgba(34,229,255,0.6);
+  }
+  .tl-item:nth-child(2)::before { border-color: var(--pu); box-shadow: 0 0 0 4px rgba(124,92,255,0.1), 0 0 14px rgba(124,92,255,0.6); }
+  .tl-item:nth-child(3)::before { border-color: var(--pk); box-shadow: 0 0 0 4px rgba(255,46,151,0.1), 0 0 14px rgba(255,46,151,0.6); }
+  .tl-item:nth-child(4)::before { border-color: var(--cy); box-shadow: 0 0 0 4px rgba(34,229,255,0.1), 0 0 14px rgba(34,229,255,0.6); }
+
+  .tl-date {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.2em;
+    color: var(--cy);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+  .tl-item h4 { font-size: 17px; font-weight: 650; margin-bottom: 8px; }
+  .tl-item p { font-size: 14px; color: var(--tx-dim); max-width: 560px; }
+
+  /* ============ CTA ============ */
+  .cta {
+    position: relative;
+    border-radius: 18px;
+    padding: 2px;
+    background: conic-gradient(from var(--angle), var(--cy), var(--pu), var(--pk), var(--cy));
+    animation: rotateAngle 7s linear infinite;
+    overflow: hidden;
+  }
+  @keyframes rotateAngle { to { --angle: 360deg; } }
+
+  .cta-inner {
+    position: relative;
+    border-radius: 16px;
+    background: linear-gradient(150deg, #070c17, #0b1424);
+    padding: clamp(48px, 7vw, 82px) clamp(28px, 5vw, 70px);
+    text-align: center;
+    overflow: hidden;
+  }
+  .cta-inner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(120,190,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(120,190,255,0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mask-image: radial-gradient(ellipse at center, #000, transparent 72%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000, transparent 72%);
+  }
+  .cta-inner > * { position: relative; }
+
+  .cta h2 { margin-bottom: 16px; }
+  .cta p { color: var(--tx-dim); max-width: 520px; margin: 0 auto 34px; font-size: 15.5px; }
+
+  /* ============ 页脚 ============ */
+  footer {
+    position: relative;
+    z-index: 5;
+    border-top: 1px solid var(--line);
+    padding: 48px 0 34px;
+    background: linear-gradient(180deg, transparent, rgba(8, 14, 26, 0.9));
+  }
+  .foot-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 34px;
+  }
+  .foot-col h5 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--tx-mute);
+    margin-bottom: 14px;
+  }
+  .foot-col ul { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+  .foot-col a {
+    color: var(--tx-dim);
+    text-decoration: none;
+    font-size: 13.5px;
+    transition: color 0.25s ease, padding-left 0.25s ease;
+  }
+  .foot-col a:hover { color: var(--cy); padding-left: 5px; }
+
+  .foot-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    color: var(--tx-mute);
+  }
+  .status { display: inline-flex; align-items: center; gap: 8px; }
+  .status i {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #2ee6a0;
+    box-shadow: 0 0 10px #2ee6a0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  /* ============ 响应式 ============ */
+  @media (max-width: 980px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 46px; }
+    .orb-stage { margin: 0 auto; max-width: 340px; }
+    .cards { grid-template-columns: repeat(2, 1fr); }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+  }
+
+  @media (max-width: 720px) {
+    .nav-links { display: none; }
+    .nav-toggle { display: block; }
+    .nav-btn { display: none; }
+    .cards { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .stat { border-right: 0; border-bottom: 1px solid var(--line); }
+    .stat:last-child { border-bottom: 0; }
+    .hero { min-height: auto; padding-top: 130px; }
+    .grid-overlay { opacity: 0.3; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<body class="locked">
+
+<!-- 开机动画 -->
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <div class="boot-logo">NEXUS SYSTEM</div>
+    <div class="boot-bar"><i></i></div>
+    <div class="boot-pct" id="bootPct">INITIALIZING 0%</div>
+  </div>
+</div>
+
+<!-- 背景 -->
+<canvas id="bg"></canvas>
+<div class="grid-overlay"></div>
+<div class="aura a1"></div>
+<div class="aura a2"></div>
+<div class="aura a3"></div>
+<div class="scanlines"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- 进度条 -->
+<div class="progress" id="progress"></div>
+
+<!-- 导航 -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand">
+    <span class="brand-mark"></span>
+    NEX<span>US</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#capability">能力矩阵</a></li>
+    <li><a href="#stack">技术栈</a></li>
+    <li><a href="#roadmap">演进路线</a></li>
+    <li><a href="#contact">接入</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView()">REQUEST ACCESS</button>
+  <button class="nav-toggle" id="navToggle" aria-label="menu"><i></i><i></i><i></i></button>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="tag"><i></i>SYSTEM ONLINE · v4.2.0</div>
+        <h1>
+          <span class="l1">构建下一代</span>
+          <span class="l2 glitch" data-text="智能技术中枢">智能技术中枢</span>
+        </h1>
+        <div class="hero-typed">
+          <span id="typed"></span><span class="caret"></span>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        <p class="hero-desc">
+          高性能实时计算内核，融合分布式调度、智能体编排与边缘推理。
+          从数据接入到决策输出，全链路低延迟、可观测、可扩展。
+        </p>
+        <div class="hero-actions">
+          <a href="#capability" class="btn btn-primary">
+            开始探索
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#stack" class="btn btn-ghost">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5v14l11-7z"/></svg>
+            查看架构
+          </a>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        <div class="hero-meta">
+          <span>延迟 <b>&lt; 8ms</b></span>
+          <span>可用性 <b>99.99%</b></span>
+          <span>节点 <b>1,024</b></span>
         </div>
-    </section>
+      </div>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+      <div class="orb-stage">
+        <div class="orb-ring"><i></i></div>
+        <div class="orb-ring"><i></i></div>
+        <div class="orb-ring"><i></i></div>
+        <div class="orb-core"></div>
+        <div class="orb-chip c1">CORE <b>ACTIVE</b></div>
+        <div class="orb-chip c2">TPS <b>128K</b></div>
+        <div class="orb-chip c3">UPTIME <b>99.99%</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 数据 -->
+  <section class="stats">
+    <div class="wrap">
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num"><span class="count" data-to="128">0</span><i>K</i></div>
+          <div class="stat-label">峰值吞吐 TPS</div>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+        <div class="stat">
+          <div class="stat-num"><span class="count" data-to="7.6" data-dec="1">0</span><i>ms</i></div>
+          <div class="stat-label">端到端延迟</div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        <div class="stat">
+          <div class="stat-num"><span class="count" data-to="99.99" data-dec="2">0</span><i>%</i></div>
+          <div class="stat-label">服务可用性</div>
         </div>
-    </footer>
+        <div class="stat">
+          <div class="stat-num"><span class="count" data-to="42">0</span><i>+</i></div>
+          <div class="stat-label">全球边缘节点</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <!-- 能力矩阵 -->
+  <section id="capability">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag"><i></i>CAPABILITY MATRIX</div>
+        <h2>六大核心<em>能力模块</em></h2>
+        <p>模块化解耦、按需组合。每一层都可独立伸缩，也可整体编排为统一的工作流引擎。</p>
+      </div>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+      <div class="cards">
+        <article class="card reveal">
+          <span class="card-idx">/ 01</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 3 14h8l-1 8 10-12h-8z"/></svg>
+          </div>
+          <h3>实时计算引擎</h3>
+          <p>流式处理管线，毫秒级窗口聚合与增量计算，支持复杂事件处理与状态回溯。</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-idx">/ 02</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.9 2.9M16.2 16.2l2.9 2.9M19.1 4.9l-2.9 2.9M7.8 16.2l-2.9 2.9"/></svg>
+          </div>
+          <h3>智能体编排</h3>
+          <p>多智能体协同调度，任务拆解、并行执行与结果融合，全流程可追踪可回放。</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-idx">/ 03</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3>零信任安全</h3>
+          <p>端到端加密、细粒度权限模型与密钥轮换机制，每一次调用都具备完整审计链路。</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-idx">/ 04</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-5 3 3 5-7"/></svg>
+          </div>
+          <h3>全链路可观测</h3>
+          <p>指标、日志、调用链三位一体，异常自动归因，性能瓶颈定位到具体代码行。</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-idx">/ 05</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/></svg>
+          </div>
+          <h3>弹性分布式</h3>
+          <p>多活容灾与一致性哈希调度，节点故障秒级自愈，容量随业务曲线自动伸缩。</p>
+        </article>
+
+        <article class="card reveal">
+          <span class="card-idx">/ 06</span>
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17V9M10 17V5M16 17v-6M22 17H2"/></svg>
+          </div>
+          <h3>边缘推理</h3>
+          <p>模型量化与就近部署，把算力下沉到离用户最近的一跳，推理延迟压到极限。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技术栈 -->
+  <section id="stack">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag"><i></i>TECH STACK</div>
+        <h2>经过验证的<em>技术底座</em></h2>
+        <p>不追新，只选对的。每一层组件都经过大规模生产环境长期打磨。</p>
+      </div>
+    </div>
+
+    <div class="marquee reveal">
+      <div class="marquee-track" id="track1"></div>
+    </div>
+    <div class="marquee rev reveal">
+      <div class="marquee-track" id="track2"></div>
+    </div>
+  </section>
+
+  <!-- 演进路线 -->
+  <section id="roadmap">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <div class="tag"><i></i>ROADMAP</div>
+        <h2>持续演进的<em>技术路线</em></h2>
+        <p>从单点能力到完整生态，每一步都有明确的可量化目标。</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-date">PHASE 01 / 基础层</div>
+          <h4>统一接入与协议标准化</h4>
+          <p>统一数据接入网关，屏蔽异构协议差异，建立端到端的数据契约与版本管理机制。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">PHASE 02 / 计算层</div>
+          <h4>实时计算与智能调度</h4>
+          <p>引入流批一体计算模型，配合动态优先级调度器，在流量洪峰下保持稳定时延。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">PHASE 03 / 智能层</div>
+          <h4>多智能体协同决策</h4>
+          <p>构建可组合的智能体网络，支持任务分解、工具调用与结果校验的完整闭环。</p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-date">PHASE 04 / 生态层</div>
+          <h4>开放能力与边缘协同</h4>
+          <p>开放核心能力接口，联合边缘节点形成算力网络，让智能真正下沉到业务现场。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="cta reveal">
+        <div class="cta-inner">
+          <div class="tag"><i></i>GET STARTED</div>
+          <h2>准备好接入 <em>NEXUS</em> 了吗</h2>
+          <p>提交接入申请后，我们会在一个工作日内响应，并提供完整的沙箱环境与技术文档。</p>
+          <div class="hero-actions" style="justify-content:center; margin-bottom:0;">
+            <a href="mailto:hello@nexus.dev" class="btn btn-primary">申请接入</a>
+            <a href="#top" class="btn btn-ghost">返回顶部</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col" style="max-width:280px;">
+        <a href="#top" class="brand" style="margin-bottom:14px;">
+          <span class="brand-mark"></span>
+          NEX<span>US</span>
+        </a>
+        <p style="color:var(--tx-mute); font-size:13.5px;">
+          构建下一代智能技术中枢，让复杂系统的运行变得可感知、可控制、可信任。
+        </p>
+      </div>
+      <div class="foot-col">
+        <h5>产品</h5>
+        <ul>
+          <li><a href="#capability">能力矩阵</a></li>
+          <li><a href="#stack">技术栈</a></li>
+          <li><a href="#roadmap">演进路线</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>资源</h5>
+        <ul>
+          <li><a href="#">开发文档</a></li>
+          <li><a href="#">API 参考</a></li>
+          <li><a href="#">状态监控</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h5>关于</h5>
+        <ul>
+          <li><a href="#">团队成员</a></li>
+          <li><a href="#">隐私政策</a></li>
+          <li><a href="#">联系我们</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 NEXUS SYSTEM · ALL RIGHTS RESERVED</span>
+      <span class="status"><i></i>ALL SYSTEMS OPERATIONAL</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- 开机动画 ---------- */
+  var boot = document.getElementById("boot");
+  var bootPct = document.getElementById("bootPct");
+  var pct = 0;
+  var pctTimer = setInterval(function () {
+    pct = Math.min(100, pct + Math.floor(Math.random() * 13) + 5);
+    bootPct.textContent = "INITIALIZING " + pct + "%";
+    if (pct >= 100) clearInterval(pctTimer);
+  }, 90);
+
+  window.addEventListener("load", function () {
+    setTimeout(function () {
+      bootPct.textContent = "INITIALIZING 100%";
+      boot.classList.add("done");
+      document.body.classList.remove("locked");
+    }, 1550);
+  });
+
+  /* ---------- 粒子星链背景 ---------- */
+  var canvas = document.getElementById("bg");
+  var ctx = canvas.getContext("2d");
+  var W, H, DPR, particles = [], mouse = { x: -9999, y: -9999 };
+  var LINK_DIST = 132;
+
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2);
+    W = canvas.width = Math.floor(window.innerWidth * DPR);
+    H = canvas.height = Math.floor(window.innerHeight * DPR);
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    buildParticles();
+  }
+
+  function buildParticles() {
+    var target = Math.min(110, Math.floor((window.innerWidth * window.innerHeight) / 16000));
+    particles = [];
+    for (var i = 0; i < target; i++) {
+      particles.push({
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.24 * DPR,
+        vy: (Math.random() - 0.5) * 0.24 * DPR,
+        r: (Math.random() * 1.5 + 0.6) * DPR,
+        hue: Math.random() > 0.68 ? 268 : 188
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    var i, j, p, q, dx, dy, d, a;
+
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0 || p.x > W) p.vx *= -1;
+      if (p.y < 0 || p.y > H) p.vy *= -1;
+
+      // 鼠标轻推
+      dx = p.x - mouse.x * DPR;
+      dy = p.y - mouse.y * DPR;
+      d = Math.sqrt(dx * dx + dy * dy);
+      if (d < 130 * DPR && d > 0.1) {
+        var f = (1 - d / (130 * DPR)) * 0.55;
+        p.x += (dx / d) * f * DPR;
+        p.y += (dy / d) * f * DPR;
+      }
+    }
+
+    // 连线
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i];
+      for (j = i + 1; j < particles.length; j++) {
+        q = particles[j];
+        dx = p.x - q.x;
+        dy = p.y - q.y;
+        d = Math.sqrt(dx * dx + dy * dy);
+        if (d < LINK_DIST * DPR) {
+          a = (1 - d / (LINK_DIST * DPR)) * 0.32;
+          ctx.strokeStyle = "rgba(90, 190, 255," + a.toFixed(3) + ")";
+          ctx.lineWidth = DPR * 0.6;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.stroke();
         }
+      }
+    }
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    // 节点
+    for (i = 0; i < particles.length; i++) {
+      p = particles[i];
+      var grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 5);
+      grad.addColorStop(0, "hsla(" + p.hue + ", 100%, 72%, 0.95)");
+      grad.addColorStop(1, "hsla(" + p.hue + ", 100%, 60%, 0)");
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 5, 0, Math.PI * 2);
+      ctx.fill();
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+      ctx.fillStyle = "hsla(" + p.hue + ", 100%, 82%, 0.9)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 0.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("resize", resize);
+    resize();
+    draw();
+  } else {
+    canvas.style.display = "none";
+  }
+
+  /* ---------- 鼠标位置 / 光晕 ---------- */
+  var glow = document.getElementById("cursorGlow");
+  var gx = 0, gy = 0, tx = 0, ty = 0;
+
+  window.addEventListener("mousemove", function (e) {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+    tx = e.clientX;
+    ty = e.clientY;
+    glow.style.opacity = "1";
+  });
+
+  window.addEventListener("mouseout", function () {
+    glow.style.opacity = "0";
+    mouse.x = -9999;
+    mouse.y = -9999;
+  });
+
+  (function followGlow() {
+    gx += (tx - gx) * 0.09;
+    gy += (ty - gy) * 0.09;
+    glow.style.transform = "translate(" + gx + "px," + gy + "px)";
+    requestAnimationFrame(followGlow);
+  })();
+
+  /* ---------- 打字机 ---------- */
+  var phrases = [
+    "> initializing realtime kernel ...",
+    "> 分布式调度 · 智能体编排 · 边缘推理",
+    "> latency optimized · 7.6ms p99",
+    "> building the next-gen tech core."
+  ];
+  var typedEl = document.getElementById("typed");
+  var pi = 0, ci = 0, deleting = false;
+
+  function type() {
+    var full = phrases[pi];
+    if (!deleting) {
+      typedEl.textContent = full.slice(0, ++ci);
+      if (ci === full.length) {
+        deleting = true;
+        return setTimeout(type, 1900);
+      }
+      setTimeout(type, 45);
+    } else {
+      typedEl.textContent = full.slice(0, --ci);
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        return setTimeout(type, 380);
+      }
+      setTimeout(type, 22);
+    }
+  }
+  setTimeout(type, 1800);
+
+  /* ---------- 数字滚动 ---------- */
+  function runCount(el) {
+    var to = parseFloat(el.getAttribute("data-to"));
+    var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
+    var dur = 1700, start = null;
+
+    function step(ts) {
+      if (start === null) start = ts;
+      var prog = Math.min((ts - start) / dur, 1);
+      var eased = 1 - Math.pow(1 - prog, 3);
+      el.textContent = (to * eased).toFixed(dec);
+      if (prog < 1) requestAnimationFrame(step);
+      else el.textContent = to.toFixed(dec);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- 滚动显现 ---------- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      en.target.classList.add("in");
+      en.target.querySelectorAll(".count").forEach(function (c) {
+        if (!c.dataset.done) { c.dataset.done = "1"; runCount(c); }
+      });
+      io.unobserve(en.target);
+    });
+  }, { threshold: 0.16, rootMargin: "0px 0px -60px 0px" });
+
+  document.querySelectorAll(".reveal").forEach(function (el, i) {
+    el.style.transitionDelay = (i % 3) * 0.08 + "s";
+    io.observe(el);
+  });
+
+  /* ---------- 卡片光斑跟随 ---------- */
+  document.querySelectorAll(".card").forEach(function (card) {
+    card.addEventListener("mousemove", function (e) {
+      var r = card.getBoundingClientRect();
+      card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+      card.style.setProperty("--my", (e.clientY - r.top) + "px");
+    });
+  });
+
+  /* ---------- 导航 / 进度条 ---------- */
+  var nav = document.getElementById("nav");
+  var progress = document.getElementById("progress");
+
+  function onScroll() {
+    var y = window.scrollY || document.documentElement.scrollTop;
+    nav.classList.toggle("solid", y > 30);
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    progress.style.width = (h > 0 ? (y / h) * 100 : 0) + "%";
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  /* ---------- 技术栈跑马灯 ---------- */
+  var stack = [
+    "Kubernetes", "Rust", "Go", "WebAssembly", "gRPC", "Redis",
+    "Kafka", "ClickHouse", "PostgreSQL", "eBPF", "Prometheus", "Envoy",
+    "TypeScript", "WebGPU", "ONNX Runtime", "Terraform"
+  ];
+
+  function fillTrack(id) {
+    var track = document.getElementById(id);
+    if (!track) return;
+    var html = "";
+    stack.concat(stack).forEach(function (name) {
+      html += '<span class="pill"><i></i>' + name + "</span>";
+    });
+    track.innerHTML = html;
+  }
+  fillTrack("track1");
+  fillTrack("track2");
+
+  /* ---------- 移动端菜单 ---------- */
+  var toggle = document.getElementById("navToggle");
+  if (toggle) {
+    toggle.addEventListener("click", function () {
+      var links = document.querySelector(".nav-links");
+      var open = links.style.display === "flex";
+      links.style.display = open ? "" : "flex";
+      links.style.position = "absolute";
+      links.style.top = "100%";
+      links.style.left = "0";
+      links.style.right = "0";
+      links.style.flexDirection = "column";
+      links.style.gap = "18px";
+      links.style.padding = "22px 24px";
+      links.style.background = "rgba(5,9,16,0.96)";
+      links.style.borderBottom = "1px solid rgba(120,190,255,0.14)";
+      links.style.backdropFilter = "blur(14px)";
+    });
+  }
+})();
+</script>
 </body>
-
 </html>
